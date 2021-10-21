@@ -5,6 +5,10 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+    
+env:
+   PUBLISHPATH: '.'
+   Azure_Web_App: 'DemoWebAppSatya'
 
 jobs:
   build:
@@ -23,3 +27,12 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      
+    - name: dotnet publish  
+      run: dotnet publish--Configuration Release -o '${{env.PUBLISHPATH}}/publish'
+    - name: Azure WebApp Deploy
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: '${{env.Azure_Web_App}}/publish'
+        publish-profile: '${{secrets.CONSTRING}}' 
+        package: '${{env.PUBLISHPATH}}/publish'
