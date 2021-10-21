@@ -29,7 +29,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       
     - name: dotnetpublish  
-      run: dotnet publish --Configuration Release -o '${{env.PUBLISHPATH}}/publish'
+      run: dotnet publish --configuration Release -o '${{env.PUBLISHPATH}}/publish'
     - name: Azure WebApp Deploy
       uses: Azure/webapps-deploy@v2
       with:
