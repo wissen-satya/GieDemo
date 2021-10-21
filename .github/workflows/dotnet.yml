@@ -33,6 +33,6 @@ jobs:
     - name: Azure WebApp Deploy
       uses: Azure/webapps-deploy@v2
       with:
-        app-name: '${{env.Azure_Web_App}}/publish'
+        app-name: '${{env.Azure_Web_App}}'
         publish-profile: '${{secrets.CONSTRING}}' 
         package: '${{env.PUBLISHPATH}}/publish'
